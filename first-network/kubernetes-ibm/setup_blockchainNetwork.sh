@@ -35,16 +35,9 @@ if [ "$(kubectl get pvc | grep shared-pvc | awk '{print $2}')" != "Bound" ]; the
     echo "The Persistant Volume does not seem to exist or is not bound"
     echo "Creating Persistant Volume"
 
-    if [ "$1" == "--paid" ]; then
-        echo "You passed argument --paid. Make sure you have an IBM Cloud Kubernetes - Standard tier. Else, remove --paid option"
-        echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/createVolume-paid.yaml"
-        kubectl create -f ${KUBECONFIG_FOLDER}/createVolume-paid.yaml
-        sleep 5
-    else
-        echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/createVolume.yaml"
-        kubectl create -f ${KUBECONFIG_FOLDER}/createVolume.yaml
-        sleep 5
-    fi
+    echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/createVolume.yaml"
+    kubectl create -f ${KUBECONFIG_FOLDER}/createVolume.yaml
+    sleep 5
 
     if [ "kubectl get pvc | grep shared-pvc | awk '{print $3}'" != "shared-pv" ]; then
         echo "Success creating Persistant Volume"
@@ -158,24 +151,23 @@ done
 echo "Create Channel Completed Successfully"
 
 
-## Join all peers on a channel
-#echo -e "\nCreating joinchannel job"
-#echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/join_channel.yaml"
-#kubectl create -f ${KUBECONFIG_FOLDER}/join_channel.yaml
-#
-#JOBSTATUS=$(kubectl get jobs |grep joinchannel |awk '{print $3}')
-#while [ "${JOBSTATUS}" != "1" ]; do
-#    echo "Waiting for joinchannel job to be completed"
-#    sleep 1;
-#    if [ "$(kubectl get pods | grep joinchannel | awk '{print $3}')" == "Error" ]; then
-#        echo "Join Channel Failed"
-#        exit 1
-#    fi
-#    JOBSTATUS=$(kubectl get jobs |grep joinchannel |awk '{print $3}')
-#done
-#echo "Join Channel Completed Successfully"
-#
-#
+# Join all four peers on a channel
+echo -e "\nCreating joinchannel job"
+echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/join_channel.yaml"
+kubectl create -f ${KUBECONFIG_FOLDER}/join_channel.yaml
+
+JOBSTATUS=$(kubectl get jobs |grep joinchannel |awk '{print $3}')
+while [ "${JOBSTATUS}" != "1" ]; do
+    echo "Waiting for joinchannel job to be completed"
+    sleep 1;
+    if [ "$(kubectl get pods | grep joinchannel | awk '{print $3}')" == "Error" ]; then
+        echo "Join Channel Failed"
+        exit 1
+    fi
+    JOBSTATUS=$(kubectl get jobs |grep joinchannel |awk '{print $3}')
+done
+echo "Join Channel Completed Successfully"
+
 ## Install chaincode on each peer
 #echo -e "\nCreating installchaincode job"
 #echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/chaincode_install.yaml"

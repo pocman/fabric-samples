@@ -62,7 +62,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: peer0.org1.example.com
+  name: peer0-org1-example-com
 spec:
   replicas: 1
   template:
@@ -90,13 +90,13 @@ spec:
         - name: CORE_PEER_ID
           value: org1peer0
         - name: CORE_PEER_ADDRESS
-          value: peer0.org1.example.com:30110
+          value: peer0-org1-example-com:30110
         - name: CORE_PEER_LISTENADDRESS
           value: 0.0.0.0:30110
         - name: CORE_PEER_EVENTS_ADDRESS
           value: 0.0.0.0:30111
         - name: CORE_PEER_GOSSIP_BOOTSTRAP
-          value: peer0.org1.example.com:30110
+          value: peer0-org1-example-com:30110
         - name: CORE_PEER_GOSSIP_ORGLEADER
           value: "false"
         - name: CORE_PEER_GOSSIP_SKIPHANDSHAKE
@@ -110,7 +110,7 @@ spec:
         - name: CORE_PEER_LOCALMSPID
           value: Org1MSP
         - name: CORE_PEER_MSPCONFIGPATH
-          value: /shared/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp/
+          value: /shared/crypto-config/peerOrganizations/org1.example.com/peers/peer0-org1-example-com/msp/
         - name: CORE_LOGGING_LEVEL
           value: debug
         - name: CORE_LOGGING_PEER
@@ -148,7 +148,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: peer1.org1.example.com
+  name: peer1-org1-example-com
 spec:
   replicas: 1
   template:
@@ -176,13 +176,13 @@ spec:
         - name: CORE_PEER_NETWORKID
           value: nid1
         - name: CORE_PEER_ADDRESS
-          value: peer1.org1.example.com:30210
+          value: peer1-org1-example-com:30210
         - name: CORE_PEER_LISTENADDRESS
           value: 0.0.0.0:30210
         - name: CORE_PEER_EVENTS_ADDRESS
           value: 0.0.0.0:30211
         - name: CORE_PEER_GOSSIP_BOOTSTRAP
-          value: peer1.org1.example.com:30210
+          value: peer1-org1-example-com:30210
         - name: CORE_PEER_GOSSIP_ORGLEADER
           value: "false"
         - name: CORE_PEER_GOSSIP_SKIPHANDSHAKE
@@ -196,7 +196,7 @@ spec:
         - name: CORE_PEER_LOCALMSPID
           value: Org2MSP
         - name: CORE_PEER_MSPCONFIGPATH
-          value: /shared/crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/msp/
+          value: /shared/crypto-config/peerOrganizations/org1.example.com/peers/peer1-org1-example-com/msp/
         - name: CORE_LOGGING_LEVEL
           value: debug
         - name: CORE_LOGGING_PEER
@@ -235,7 +235,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: peer0.org2.example.com
+  name: peer0-org2-example-com
 spec:
   replicas: 1
   template:
@@ -263,13 +263,13 @@ spec:
         - name: CORE_PEER_NETWORKID
           value: nid1
         - name: CORE_PEER_ADDRESS
-          value: peer0.org2.example.com:30310
+          value: peer0-org2-example-com:30310
         - name: CORE_PEER_LISTENADDRESS
           value: 0.0.0.0:30310
         - name: CORE_PEER_EVENTS_ADDRESS
           value: 0.0.0.0:30311
         - name: CORE_PEER_GOSSIP_BOOTSTRAP
-          value: peer0.org2.example.com:30310
+          value: peer0-org2-example-com:30310
         - name: CORE_PEER_GOSSIP_ORGLEADER
           value: "false"
         - name: CORE_PEER_GOSSIP_SKIPHANDSHAKE
@@ -283,7 +283,7 @@ spec:
         - name: CORE_PEER_LOCALMSPID
           value: Org3MSP
         - name: CORE_PEER_MSPCONFIGPATH
-          value: /shared/crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp/
+          value: /shared/crypto-config/peerOrganizations/org2.example.com/peers/peer0-org2-example-com/msp/
         - name: CORE_LOGGING_LEVEL
           value: debug
         - name: CORE_LOGGING_PEER
@@ -322,7 +322,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: peer1.org2.example.com
+  name: peer1-org2-example-com
 spec:
   replicas: 1
   template:
@@ -350,13 +350,13 @@ spec:
         - name: CORE_PEER_NETWORKID
           value: nid1
         - name: CORE_PEER_ADDRESS
-          value: peer1.org2.example.com:30410
+          value: peer1-org2-example-com:30410
         - name: CORE_PEER_LISTENADDRESS
           value: 0.0.0.0:30410
         - name: CORE_PEER_EVENTS_ADDRESS
           value: 0.0.0.0:30411
         - name: CORE_PEER_GOSSIP_BOOTSTRAP
-          value: peer1.org2.example.com:30410
+          value: peer1-org2-example-com:30410
         - name: CORE_PEER_GOSSIP_ORGLEADER
           value: "false"
         - name: CORE_PEER_GOSSIP_SKIPHANDSHAKE
@@ -370,7 +370,7 @@ spec:
         - name: CORE_PEER_LOCALMSPID
           value: Org4MSP
         - name: CORE_PEER_MSPCONFIGPATH
-          value: /shared/crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/msp/
+          value: /shared/crypto-config/peerOrganizations/org2.example.com/peers/peer1-org2-example-com/msp/
         - name: CORE_LOGGING_LEVEL
           value: debug
         - name: CORE_LOGGING_PEER
