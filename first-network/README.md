@@ -39,32 +39,25 @@ There are three different types of roles within a Hyperledger Fabric network:
 	The ordering service accepts endorsed transactions, orders them into a block, and delivers the blocks to the committing peers.
 	The Fabric v1.0 architecture has been designed such that the specific implementation of "ordering" becomes a pluggable component. The default ordering service for Hyperledger Fabric is Kafka. Solo is suitable for development purpose but we want an iso prod environment so we will use Kafka.
 
-During this exercice, we will probably be able to use a single endorsing peer.
+We will be using Fabric 1.3.0 version.
 
-We will also need 
-* couchdb to store the current state data that represents the latest values for all assets in the ledger. 
-* kafka for the ordering
-* zookeeper for kafka
-
-We will be using Fabric 1.2.1 version.
-
-## Planning
-* Run and fix the tutorial
-    - Fix "Waiting for container of copy artifact pod to run" when pod already succeeded
-    - First issue, the cryptogen container can't chmod on the /shared folder.
-* Migrate network configuration from first-network
-    - Copy artifacts
-    - Modify blockchain-services.yaml
-    - Modify peersDeployment
-    - Remove fabric-ca
-* Bump to Fabric 1.3.0
+## TASKS
+* Run and fix the IBM tutorial
+    - [DONE] Fix "Waiting for container of copy artifact pod to run" when pod already succeeded
+    - [DONE] First issue, the cryptogen container can't chmod on the /shared folder.
+* Migrate configuration from first-network to IBM tutorial
+    - [DONE] Copy artifacts
+    - [DONE] Modify blockchain-services.yaml (Setup 2 peers per Org)
+    - [DONE] Modify peersDeployment (Start 2 peer for Org 1 and 2)
+    - [DONE] Modify create_channel (Create a Channel Configuration Transaction and Create channel)
+    - [TODO] Enable TLS (set ORDERER_GENERAL_TLS_ENABLED=true)
 
 ## Run
 
 Install kubernetes and kubectl.
 
 ```bash
-cd blockchain-network-on-kubernetes
+cd kubernetes-ibm
 
 ## macOS
 sed -i '' s#unix:///host/var/run/docker.sock#tcp://docker:2375# configFiles/peersDeployment.yaml
@@ -74,4 +67,13 @@ sed -i s#unix:///host/var/run/docker.sock#tcp://docker:2375# configFiles/peersDe
 
 chmod +x setup_blockchainNetwork.sh
 ./setup_blockchainNetwork.sh
+```
+
+## Clean
+
+```bash
+cd kubernetes-ibm
+
+chmod +x setup_blockchainNetwork.sh
+./deleteNetwork.sh
 ```
