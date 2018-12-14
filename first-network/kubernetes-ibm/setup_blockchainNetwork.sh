@@ -64,8 +64,8 @@ pod=$(kubectl get pods --selector=job-name=copyartifacts --output=jsonpath={.ite
 
 podSTATUS=$(kubectl get pods --selector=job-name=copyartifacts --output=jsonpath={.items..phase})
 
-while [ "${podSTATUS}" != "Running" ]; do
-    echo "Wating for container of copy artifact pod to run. Current status of ${pod} is ${podSTATUS}"
+while [ "${podSTATUS}" != "Running" ] && [ "${podSTATUS}" != "Succeeded" ]; do
+    echo "Waiting for container of copy artifact pod to run. Current status of ${pod} is ${podSTATUS}"
     sleep 5;
     if [ "${podSTATUS}" == "Error" ]; then
         echo "There is an error in copyartifacts job. Please check logs."

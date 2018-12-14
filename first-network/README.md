@@ -5,7 +5,7 @@ The directions for using this are documented in the Hyperledger Fabric
 
 *NOTE:* After navigating to the documentation, choose the documentation version that matches your version of Fabric
 
-## Reformulate the problem
+## Problem definition
 
 So first, we need to define exactly what we want to do, why and how it diverge from the tutorial.
 
@@ -46,9 +46,18 @@ We will also need
 * kafka for the ordering
 * zookeeper for kafka
 
-We will be using Fabric 1.3.0 version.
+We will be using Fabric 1.2.1 version.
+
+## Planning
+* Run and fix the tutorial
+    - Fix "Waiting for container of copy artifact pod to run" when pod already succeeded
+    - First issue, the cryptogen container can't chmod on the /shared folder.
+* Migrate network configuration from first-network
+* Bump to Fabric 1.3.0
 
 ## Run
+
+Install kubernetes and kubectl.
 
 ```bash
 cd blockchain-network-on-kubernetes
