@@ -17,11 +17,11 @@ A good introduction of the architecture is available on Edx, LFS171x chapter 9.
 
 ### Why
 We want to improve the development tooling and processes and increase collaboration between data scientists, software developers, and quality engineers.
-To do so, we want to provide an easy way to run Hyperledger Fabric on a laptop.
+To do so, we want to provide **an easy way to run Hyperledger Fabric on a laptop**.
 
 ### What
 At the end of this exercice, we should be able to : 
-* build a HF network on a clean machine with kubernetes install (equivalent of docker-compose up --build)
+* build a Hyperledger Fabric network on a clean machine (equivalent of docker-compose up --build)
 * up and down the network at will (equivalent of docker-compose up|down)
 * clean the environment and all the associated data (equivalent of docker-compose down -v)
 
@@ -35,7 +35,8 @@ The goal is to follow step by step the tutorial available [here](https://hyperle
     - [✔️] Fix "Waiting for container of copy artifact pod to run" when pod already succeeded
     - [✔️] First issue, the cryptogen container can't chmod on the /shared folder.
 * [IN PROGRESS] Migrate configuration from docker-compose to kubernetes
-    - [✔️] Copy artifacts 
+    - [✔️] Copy artifacts
+    - [✔️] Improve generate artifacts
     - [✔️] Modify blockchain-services.yaml (Setup 2 peers per Org)
     - [✔️] Modify peersDeployment (Start 2 peer for Org 1 and 2)
     - [✔️] Modify create_channel (Create a Channel Configuration Transaction and Create channel)
