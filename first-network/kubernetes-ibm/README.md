@@ -31,10 +31,10 @@ As a squeleton, we can use an the amazing sample provided by IBM [here](https://
 The goal is to follow step by step the tutorial available [here](https://hyperledger-fabric.readthedocs.io/en/release-1.3/build_network.html#).
 
 ## tasks
-* Run and fix the IBM tutorial
+* [✔️] Run and fix the IBM tutorial
     - [✔️] Fix "Waiting for container of copy artifact pod to run" when pod already succeeded
     - [✔️] First issue, the cryptogen container can't chmod on the /shared folder.
-* Migrate configuration from first-network to IBM tutorial
+* [IN PROGRESS] Migrate configuration from docker-compose to kubernetes
     - [✔️] Copy artifacts 
     - [✔️] Modify blockchain-services.yaml (Setup 2 peers per Org)
     - [✔️] Modify peersDeployment (Start 2 peer for Org 1 and 2)
@@ -43,8 +43,9 @@ The goal is to follow step by step the tutorial available [here](https://hyperle
     - [✔️] Update the anchor for org 1
     - [TODO] Join channel with peer0org2 and set anchor for org2
     - [TODO] Enable TLS (set ORDERER_GENERAL_TLS_ENABLED=true)
-* Install & Instantiate Chaincode
-    
+* [TODO] Install & Instantiate Chaincode
+* [TODO] Expose UI for hyperledger
+* [TODO] Add kubernetes monitoring and alerting
     
 ## Run
 
