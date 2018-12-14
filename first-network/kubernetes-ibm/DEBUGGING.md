@@ -8,17 +8,7 @@ Troubleshooting
   $ kubectl get pods
   The connection to the server localhost:8080 was refused - did you specify the right host or port?
   ```
-  
-* If you see below error, it means this peer has not joined the channel and so your query will not work.
 
-  ![](images/error1.png)
-  
-* If you see something similar to the following:
-
-  ![](images/error2.png)
-  
-  It shows there is some error in command. For example, in this snapshot `-c` is missing before passing arguments.
-  
 * If you see the below error,
 
   ![](images/error3.png)
@@ -32,16 +22,3 @@ Troubleshooting
    $ kubectl logs [pod name]                      # if pod has one container
    $ kubectl logs [pod name] [container name]     # if pod has more than one container
   ```
-  
-* If you see something like this for chaincode instantiation,
-
-  ![](images/error4.png)
-  
-  It means chaincode has been instantiated already on the peer. Retrying of the same will fail with this error. You can ignore
-  this message and continue with your transactions (invoke/query).
-  
-* If you see error as shown below:
-
-  ![](images/error5.png)
-
-  It is intermittent issue and might occur because of network. Delete the network and retry afresh after sometime. 
