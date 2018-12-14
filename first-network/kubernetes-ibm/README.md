@@ -28,24 +28,24 @@ At the end of this exercice, we should be able to :
 ### How
 We need to adapt the tutorial available in the repo to run on kubernetes (its currently running with docker-compose with a lot of [prerequisites](https://hyperledger-fabric.readthedocs.io/en/release-1.3/prereqs.html#prerequisites)). 
 As a squeleton, we can use an the amazing sample provided by IBM [here](https://github.com/IBM/blockchain-network-on-kubernetes) for hyperledger v1.2.1.
-The goal is to follow step by step the tutorial availabile [here](https://hyperledger-fabric.readthedocs.io/en/release-1.3/build_network.html#).
+The goal is to follow step by step the tutorial available [here](https://hyperledger-fabric.readthedocs.io/en/release-1.3/build_network.html#).
 
-## TASKS
+## tasks
 * Run and fix the IBM tutorial
-    - [DONE] Fix "Waiting for container of copy artifact pod to run" when pod already succeeded
-    - [DONE] First issue, the cryptogen container can't chmod on the /shared folder.
+    - [✔️] Fix "Waiting for container of copy artifact pod to run" when pod already succeeded
+    - [✔️] First issue, the cryptogen container can't chmod on the /shared folder.
 * Migrate configuration from first-network to IBM tutorial
-    - [DONE] Copy artifacts 
-    - [DONE] Modify blockchain-services.yaml (Setup 2 peers per Org)
-    - [DONE] Modify peersDeployment (Start 2 peer for Org 1 and 2)
-    - [DONE] Modify create_channel (Create a Channel Configuration Transaction and Create channel)
-    - [DONE] Join the channel
-    - [DONE] Update the anchor for org 1
+    - [✔️] Copy artifacts 
+    - [✔️] Modify blockchain-services.yaml (Setup 2 peers per Org)
+    - [✔️] Modify peersDeployment (Start 2 peer for Org 1 and 2)
+    - [✔️] Modify create_channel (Create a Channel Configuration Transaction and Create channel)
+    - [✔️] Join the channel
+    - [✔️] Update the anchor for org 1
     - [TODO] Join channel with peer0org2 and set anchor for org2
     - [TODO] Enable TLS (set ORDERER_GENERAL_TLS_ENABLED=true)
 * Install & Instantiate Chaincode
-    ...
-
+    
+    
 ## Run
 
 Install kubernetes and kubectl.
@@ -61,9 +61,43 @@ chmod +x setup_blockchainNetwork.sh
 ./setup_blockchainNetwork.sh
 ```
 
+### Result
+
+At the end of the process, you should end up with the following pods : 
+![pods](./images/pods.png)
+
+Here is the last log from the pod in charge of updating the anchor peer:
+![anchor](./images/anchor_peer_update.png)
+
 ## Clean
 
 ```bash
-chmod +x setup_blockchainNetwork.sh
+chmod +x deleteNetwork.sh
 ./deleteNetwork.sh
 ```
+
+## Troubleshooting
+
+* Always start your network fresh. Use the script `deleteNetwork.sh` to delete any pre-existing jobs/pods etc.
+
+* If you see below error, then environment is not set properly and therefore kubectl commands will not work.
+  ```
+  $ kubectl get pods
+  The connection to the server localhost:8080 was refused - did you specify the right host or port?
+  ```
+  
+  please follow this [guide](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
+
+* If you see the below error,
+
+  ![](images/error3.png)
+  
+  There is something wrong with the setup. You would like to do setup from a fresh.
+  
+* For debugging purposes, if you want to inspect the logs of any container, then run the following command.
+
+  ```
+   $ kubectl get pods --show-all                  # Get the name of the pod
+   $ kubectl logs [pod name]                      # if pod has one container
+   $ kubectl logs [pod name] [container name]     # if pod has more than one container
+  ```
