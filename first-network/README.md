@@ -53,6 +53,10 @@ We will be using Fabric 1.2.1 version.
     - Fix "Waiting for container of copy artifact pod to run" when pod already succeeded
     - First issue, the cryptogen container can't chmod on the /shared folder.
 * Migrate network configuration from first-network
+    - Copy artifacts
+    - Modify blockchain-services.yaml
+    - Modify peersDeployment
+    - Remove fabric-ca
 * Bump to Fabric 1.3.0
 
 ## Run

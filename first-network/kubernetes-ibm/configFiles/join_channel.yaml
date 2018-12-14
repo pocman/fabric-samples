@@ -27,7 +27,7 @@ spec:
         - name: ORDERER_URL
           value: blockchain-orderer:31010
         - name: CORE_PEER_ADDRESS
-          value: blockchain-org1peer1:30110
+          value: peer0.org1.example.com:30110
         - name: CORE_PEER_LOCALMSPID
           value: Org1MSP
         - name: CORE_PEER_MSPID
@@ -56,7 +56,7 @@ spec:
         - name: ORDERER_URL
           value: blockchain-orderer:31010
         - name: CORE_PEER_ADDRESS
-          value: blockchain-org2peer1:30210
+          value: peer1.org1.example.com:30210
         - name: CORE_PEER_LOCALMSPID
           value: Org2MSP
         - name: CORE_PEER_MSPID
@@ -85,7 +85,7 @@ spec:
         - name: ORDERER_URL
           value: blockchain-orderer:31010
         - name: CORE_PEER_ADDRESS
-          value: blockchain-org3peer1:30310
+          value: peer0.org2.example.com:30310
         - name: CORE_PEER_LOCALMSPID
           value: Org3MSP
         - name: CORE_PEER_MSPID
@@ -114,7 +114,7 @@ spec:
         - name: ORDERER_URL
           value: blockchain-orderer:31010
         - name: CORE_PEER_ADDRESS
-          value: blockchain-org4peer1:30410
+          value: peer1.org2.example.com:30410
         - name: CORE_PEER_LOCALMSPID
           value: Org4MSP
         - name: CORE_PEER_MSPID

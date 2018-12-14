@@ -185,10 +185,10 @@ After successful execution of the script `setup_blockchainNetwork.sh`, check the
   NAME                                    READY     STATUS    RESTARTS   AGE
   blockchain-ca-7848c48d64-2cxr5          1/1       Running   0          4m
   blockchain-orderer-596ccc458f-thdgn     1/1       Running   0          4m
-  blockchain-org1peer1-747d6bdff4-4kzts   1/1       Running   0          4m
-  blockchain-org2peer1-7794d9b8c5-sn2qf   1/1       Running   0          4m
-  blockchain-org3peer1-59b6d99c45-dhtbp   1/1       Running   0          4m
-  blockchain-org4peer1-6b6c99c45-wz9wm    1/1       Running   0          4m
+  peer0.org1.example.com-747d6bdff4-4kzts   1/1       Running   0          4m
+  peer1.org1.example.com-7794d9b8c5-sn2qf   1/1       Running   0          4m
+  peer0.org2.example.com-59b6d99c45-dhtbp   1/1       Running   0          4m
+  peer1.org2.example.com-6b6c99c45-wz9wm    1/1       Running   0          4m
   ```
 
 As mentioned above, the script joins all peers on one channel `channel1`, install chaincode on all peers and instantiate chaincode on channel. It means we can execute an invoke/query command on any peer and the response should be same on all peers. Please note that in this pattern tls certs are disabled to avoid complexity. In this pattern, the CLI commands are used to test the network. For running a query against any peer, need to get into a bash shell of a peer, run the query and exit from the peer container.
@@ -196,7 +196,7 @@ As mentioned above, the script joins all peers on one channel `channel1`, instal
 Use the following command to get into a bash shell of a peer:
 
   ```
-  $ kubectl exec -it <blockchain-org1peer1 pod name> bash
+  $ kubectl exec -it <peer0.org1.example.com pod name> bash
   ```
 
 And the command to be used to exit from the peer container is:
@@ -207,19 +207,19 @@ And the command to be used to exit from the peer container is:
 
 **Query**
 
-Chaincode was instantiated with the values as `{ a: 100, b: 200 }`. Let’s query to `org1peer1` for the value of `a` to make sure the chaincode was properly instantiated.
+Chaincode was instantiated with the values as `{ a: 100, b: 200 }`. Let’s query to `org1peer0` for the value of `a` to make sure the chaincode was properly instantiated.
 
   ![](images/first-query.png)
 
 **Invoke**
 
-Now let’s submit a request to `org2peer1` to move 20 from `a` to `b`. A new transaction will be generated and upon successful completion of transaction, state will get updated.
+Now let’s submit a request to `org1peer1` to move 20 from `a` to `b`. A new transaction will be generated and upon successful completion of transaction, state will get updated.
 
   ![](images/invoke.png)
 
 **Query**
 
-Let’s confirm that our previous invocation executed properly. We initialized the key `a` with a value of 100 and just removed 20 with our previous invocation. Therefore, a query against `a` should show 80 and a query against `b` should show 220. Now issue the query request to `org3peer1` and `org4peer1` as shown.
+Let’s confirm that our previous invocation executed properly. We initialized the key `a` with a value of 100 and just removed 20 with our previous invocation. Therefore, a query against `a` should show 80 and a query against `b` should show 220. Now issue the query request to `org2peer0` and `org1peer1` as shown.
 
   ![](images/second-query.png)
 
