@@ -59,6 +59,7 @@ podSTATUS=$(kubectl get pods --selector=job-name=copyartifacts --output=jsonpath
 
 while [ "${podSTATUS}" != "Running" ] && [ "${podSTATUS}" != "Succeeded" ]; do
     echo "Waiting for container of copy artifact pod to run. Current status of ${pod} is ${podSTATUS}"
+    echo "If this process is stuck, consider running ./deleteNetwork before retrying."
     sleep 5;
     if [ "${podSTATUS}" == "Error" ]; then
         echo "There is an error in copyartifacts job. Please check logs."
@@ -151,7 +152,7 @@ done
 echo "Create Channel Completed Successfully"
 
 
-# Join all four peers on a channel
+# Join one peers on a channel
 echo -e "\nCreating joinchannel job"
 echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/join_channel.yaml"
 kubectl create -f ${KUBECONFIG_FOLDER}/join_channel.yaml
@@ -167,6 +168,23 @@ while [ "${JOBSTATUS}" != "1" ]; do
     JOBSTATUS=$(kubectl get jobs |grep joinchannel |awk '{print $3}')
 done
 echo "Join Channel Completed Successfully"
+
+# Update the anchor peers
+echo -e "\nCreating updateanchor job"
+echo "Running: kubectl create -f ${KUBECONFIG_FOLDER}/update_channel_anchor.yaml"
+kubectl create -f ${KUBECONFIG_FOLDER}/update_channel_anchor.yaml
+
+JOBSTATUS=$(kubectl get jobs |grep updateanchor |awk '{print $3}')
+while [ "${JOBSTATUS}" != "1" ]; do
+    echo "Waiting for updateanchor job to be completed"
+    sleep 1;
+    if [ "$(kubectl get pods | grep updateanchor | awk '{print $3}')" == "Error" ]; then
+        echo "Update the anchor peers Failed"
+        exit 1
+    fi
+    JOBSTATUS=$(kubectl get jobs |grep updateanchor |awk '{print $3}')
+done
+echo "Update the Anchor Completed Successfully"
 
 ## Install chaincode on each peer
 #echo -e "\nCreating installchaincode job"

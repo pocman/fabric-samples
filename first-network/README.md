@@ -50,6 +50,9 @@ We will be using Fabric 1.3.0 version.
     - [DONE] Modify blockchain-services.yaml (Setup 2 peers per Org)
     - [DONE] Modify peersDeployment (Start 2 peer for Org 1 and 2)
     - [DONE] Modify create_channel (Create a Channel Configuration Transaction and Create channel)
+    - [DONE] Join the channel
+    - [DONE] Update the anchor for org 1
+    - [TODO] Join channel with peer0org2 and set anchor for org2
     - [TODO] Enable TLS (set ORDERER_GENERAL_TLS_ENABLED=true)
 
 ## Run

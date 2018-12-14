@@ -2,12 +2,12 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: joinchannel
+  name: updateanchor
 spec:
   backoffLimit: 1
   template:
     metadata:
-      name: joinchannel
+      name: updateanchor
     spec:
       restartPolicy: "Never"
       volumes:
@@ -15,10 +15,10 @@ spec:
         persistentVolumeClaim:
           claimName: shared-pvc
       containers:
-      - name: joinchannel1
+      - name: updateanchor1
         image: hyperledger/fabric-peer:1.3.0
         imagePullPolicy: Always
-        command: ["sh", "-c", "peer channel fetch newest -o ${ORDERER_URL} -c ${CHANNEL_NAME} && peer channel join -b ${CHANNEL_NAME}_newest.block "]
+        command: ["sh", "-c", "cd /shared && pwd && ls && peer channel update -o ${ORDERER_URL} -c ${CHANNEL_NAME} -f ./Org1MSPanchors.tx "]
         env:
         - name: CHANNEL_NAME
           value: channel1
